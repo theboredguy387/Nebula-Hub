@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings | Nebula Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/storage/css/main.css" />
+</head>
+<body>
+    <div class="nebula-bg"></div>
+    
+    <header class="page-header">
+        <a href="/" class="back-btn">← Home</a>
+        <h1>Settings</h1>
+    </header>
+
+    <main class="settings-container">
+        <div class="setting-group">
+            <h3>Appearance</h3>
+            <div class="setting-item">
+                <label>Theme</label>
+                <select id="themeSelect">
+                    <option value="dark">Dark Nebula</option>
+                    <option value="blue">Blue Nebula</option>
+                    <option value="purple">Purple Nebula</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>Background Animation</label>
+                <input type="checkbox" id="bgAnimation" checked>
+            </div>
+        </div>
+        
+        <div class="setting-group">
+            <h3>Proxy Settings</h3>
+            <div class="setting-item">
+                <label>Default Server</label>
+                <select id="defaultServer">
+                    <option value="auto">Auto Select</option>
+                    <option value="us-east">US East</option>
+                    <option value="us-west">US West</option>
+                </select>
+            </div>
+            <div class="setting-item">
+                <label>Enable Cloaking</label>
+                <input type="checkbox" id="enableCloak" checked>
+            </div>
+        </div>
+        
+        <div class="setting-group">
+            <h3>Game Settings</h3>
+            <div class="setting-item">
+                <label>Show Mature Games</label>
+                <input type="checkbox" id="showMature">
+            </div>
+            <div class="setting-item">
+                <label>Game Quality</label>
+                <select id="gameQuality">
+                    <option value="auto">Auto</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="save-btn" onclick="saveSettings()">Save Settings</button>
+        <button class="reset-btn" onclick="resetSettings()">Reset to Default</button>
+    </main>
+
+    <script src="/storage/js/settings.js"></script>
+</body>
+</html>
