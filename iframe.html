@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHE360M0YP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SHE360M0YP');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6640595376330309" crossorigin="anonymous"></script>
+    <title>Nebula Hub | Game</title>
+    <link rel="icon" href="/storage/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a1a;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .nebula-header {
+            background: linear-gradient(90deg, #1a0a2a, #0a0a1a);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #00a8ff;
+        }
+        .game-title {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00a8ff, #9c88ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+        .control-btn {
+            background: rgba(0, 168, 255, 0.2);
+            border: 1px solid #00a8ff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .control-btn:hover {
+            background: rgba(0, 168, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        .game-frame {
+            width: 100%;
+            height: calc(100vh - 70px);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="nebula-header">
+        <div class="game-title" id="pageTitle">Nebula Hub Game</div>
+        <div class="controls">
+            <button class="control-btn" onclick="refreshFrame()">Refresh</button>
+            <button class="control-btn" onclick="fullscreen()">Fullscreen</button>
+            <button class="control-btn" onclick="goBack()">Back</button>
+        </div>
+    </div>
+    <iframe class="game-frame" id="gameFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameUrl = urlParams.get('url') || urlParams.get('game');
+        const gameName = urlParams.get('name') || 'Game';
+        
+        document.getElementById('pageTitle').textContent = gameName + ' | Nebula Hub';
+        
+        if (gameUrl) {
+            document.getElementById('gameFrame').src = gameUrl;
+            localStorage.setItem('lastGameUrl', gameUrl);
+        }
+        
+        function refreshFrame() {
+            const frame = document.getElementById('gameFrame');
+            frame.src = frame.src;
+        }
+        
+        function fullscreen() {
+            const frame = document.getElementById('gameFrame');
+            if (frame.requestFullscreen) frame.requestFullscreen();
+            else if (frame.mozRequestFullScreen) frame.mozRequestFullScreen();
+            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') goBack();
+            if (e.key === 'F5') refreshFrame();
+            if (e.key === 'F11') fullscreen();
+        });
+    </script>
+</body>
+</html>
