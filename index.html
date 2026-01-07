@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHE360M0YP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SHE360M0YP');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6640595376330309" crossorigin="anonymous"></script>
+    <title>Nebula Hub | Cosmic Gateway</title>
+    <link rel="icon" href="/storage/images/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/storage/css/main.css" />
+</head>
+<body>
+    <div class="nebula-bg"></div>
+    
+    <header class="main-header">
+        <div class="logo">
+            <h1>Nebula Hub</h1>
+            <p>Cosmic Unblocking Experience</p>
+        </div>
+        <nav>
+            <a href="/" class="active">Home</a>
+            <a href="/games.html">Games</a>
+            <a href="/proxy.html">Proxy</a>
+            <a href="/apps.html">Apps</a>
+            <a href="/settings.html">Settings</a>
+        </nav>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <h2>Welcome to the Cosmos</h2>
+            <p>Unblocked gaming and browsing through nebula-powered servers</p>
+            <div class="hero-buttons">
+                <a href="/games.html" class="btn btn-large">Explore Games</a>
+                <a href="/proxy.html" class="btn btn-outline btn-large">Start Browsing</a>
+            </div>
+        </div>
+        
+        <div class="featured-games">
+            <h3>Featured Games</h3>
+            <div class="game-grid">
+                <div class="game-card" onclick="loadGame('slope')">
+                    <h4>Slope</h4>
+                    <p>3D Ball Running</p>
+                </div>
+                <div class="game-card" onclick="loadGame('minecraft')">
+                    <h4>Minecraft</h4>
+                    <p>Classic Edition</p>
+                </div>
+                <div class="game-card" onclick="loadGame('retrobowl')">
+                    <h4>Retro Bowl</h4>
+                    <p>Football Game</p>
+                </div>
+                <div class="game-card" onclick="loadGame('subwaysurfers')">
+                    <h4>Subway Surfers</h4>
+                    <p>Endless Runner</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function loadGame(game) {
+            window.location.href = `/iframe.html?game=${game}`;
+        }
+    </script>
+    <script src="/storage/js/main.js"></script>
+</body>
+</html>
