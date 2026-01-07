@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apps | Nebula Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/storage/css/main.css" />
+    <link rel="stylesheet" href="/storage/css/apps.css" />
+</head>
+<body>
+    <div class="nebula-bg"></div>
+    
+    <header class="page-header">
+        <a href="/" class="back-btn">← Home</a>
+        <h1>Cosmic Apps</h1>
+    </header>
+
+    <main class="apps-container">
+        <div class="apps-grid">
+            <div class="app-card" onclick="loadApp('google')">
+                <div class="app-icon">G</div>
+                <h3>Google</h3>
+                <p>Search Engine</p>
+            </div>
+            <div class="app-card" onclick="loadApp('youtube')">
+                <div class="app-icon">YT</div>
+                <h3>YouTube</h3>
+                <p>Video Platform</p>
+            </div>
+            <div class="app-card" onclick="loadApp('discord')">
+                <div class="app-icon">D</div>
+                <h3>Discord</h3>
+                <p>Chat App</p>
+            </div>
+            <div class="app-card" onclick="loadApp('spotify')">
+                <div class="app-icon">S</div>
+                <h3>Spotify</h3>
+                <p>Music Streaming</p>
+            </div>
+            <div class="app-card" onclick="loadApp('netflix')">
+                <div class="app-icon">N</div>
+                <h3>Netflix</h3>
+                <p>Streaming Service</p>
+            </div>
+            <div class="app-card" onclick="loadApp('tiktok')">
+                <div class="app-icon">TT</div>
+                <h3>TikTok</h3>
+                <p>Short Videos</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function loadApp(app) {
+            const apps = {
+                'google': 'https://google.com',
+                'youtube': 'https://youtube.com',
+                'discord': 'https://discord.com',
+                'spotify': 'https://spotify.com',
+                'netflix': 'https://netflix.com',
+                'tiktok': 'https://tiktok.com'
+            };
+            if (apps[app]) {
+                window.location.href = `/proxy.html?url=${encodeURIComponent(apps[app])}`;
+            }
+        }
+    </script>
+</body>
+</html>
