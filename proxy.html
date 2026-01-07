@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic Proxy | Nebula Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/storage/css/main.css" />
+    <link rel="stylesheet" href="/storage/css/proxy.css" />
+</head>
+<body>
+    <div class="nebula-bg"></div>
+    
+    <header class="proxy-header">
+        <a href="/" class="back-btn">← Home</a>
+        <h1>Cosmic Proxy</h1>
+        <div class="vpn-indicator" id="vpnStatus">Connected</div>
+    </header>
+
+    <main class="proxy-container">
+        <div class="search-box">
+            <input type="text" id="proxyInput" placeholder="Enter URL or search term..." class="url-input">
+            <button onclick="goToProxy()" class="go-btn">Go</button>
+        </div>
+        
+        <div class="quick-links">
+            <h3>Quick Links</h3>
+            <div class="links-grid">
+                <div class="link-item" onclick="quickNav('https://google.com')">Google</div>
+                <div class="link-item" onclick="quickNav('https://youtube.com')">YouTube</div>
+                <div class="link-item" onclick="quickNav('https://discord.com')">Discord</div>
+                <div class="link-item" onclick="quickNav('https://github.com')">GitHub</div>
+                <div class="link-item" onclick="quickNav('https://spotify.com')">Spotify</div>
+                <div class="link-item" onclick="quickNav('https://netflix.com')">Netflix</div>
+            </div>
+        </div>
+        
+        <div class="vpn-selector">
+            <h3>Server Locations</h3>
+            <select id="serverSelect" class="server-select">
+                <option value="auto">Auto (Fastest)</option>
+                <option value="us-east">US East</option>
+                <option value="us-west">US West</option>
+                <option value="europe">Europe</option>
+                <option value="asia">Asia</option>
+                <option value="australia">Australia</option>
+            </select>
+        </div>
+    </main>
+
+    <script src="/storage/js/proxy.js"></script>
+</body>
+</html>
