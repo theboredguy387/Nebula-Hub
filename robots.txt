@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /scram/
+Disallow: /bare/
+Disallow: /sw.js
+
+Sitemap: https://theboredguy387.github.io/Nebula-Hub/sitemap.xml
