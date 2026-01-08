@@ -3,17 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHE360M0YP"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SHE360M0YP');
-    </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6640595376330309" crossorigin="anonymous"></script>
-    <title>Nebula Hub | Game</title>
-    <link rel="icon" href="/storage/images/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
+    <title>Game | Nebula Hub</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -23,14 +13,22 @@
             height: 100vh;
             overflow: hidden;
         }
-        .nebula-header {
-            background: linear-gradient(90deg, #1a0a2a, #0a0a1a);
+        
+        .game-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .game-header {
+            background: rgba(26, 10, 42, 0.95);
             padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #00a8ff;
         }
+        
         .game-title {
             font-size: 20px;
             font-weight: bold;
@@ -38,73 +36,171 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        
         .controls {
             display: flex;
             gap: 15px;
         }
+        
         .control-btn {
             background: rgba(0, 168, 255, 0.2);
             border: 1px solid #00a8ff;
             color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
+            padding: 10px 20px;
+            border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: bold;
         }
+        
         .control-btn:hover {
             background: rgba(0, 168, 255, 0.4);
             transform: translateY(-2px);
         }
+        
         .game-frame {
+            flex: 1;
             width: 100%;
-            height: calc(100vh - 70px);
             border: none;
+            background: white;
+        }
+        
+        /* Sidebar for non-fullscreen */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 100vh;
+            background: rgba(26, 10, 42, 0.95);
+            border-right: 2px solid #00a8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .sidebar-btn {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-btn:hover {
+            background: rgba(0, 168, 255, 0.2);
+        }
+        
+        /* Hide sidebar in fullscreen */
+        :fullscreen .sidebar {
+            display: none;
+        }
+        
+        :fullscreen .game-header {
+            display: none;
+        }
+        
+        :fullscreen .game-frame {
+            height: 100vh;
         }
     </style>
 </head>
 <body>
-    <div class="nebula-header">
-        <div class="game-title" id="pageTitle">Nebula Hub Game</div>
-        <div class="controls">
-            <button class="control-btn" onclick="refreshFrame()">Refresh</button>
-            <button class="control-btn" onclick="fullscreen()">Fullscreen</button>
-            <button class="control-btn" onclick="goBack()">Back</button>
-        </div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-btn" onclick="goBack()" title="Back">←</div>
+        <div class="sidebar-btn" onclick="refreshGame()" title="Refresh">↻</div>
+        <div class="sidebar-btn" onclick="fullscreen()" title="Fullscreen">⛶</div>
+        <div class="sidebar-btn" onclick="goHome()" title="Home">🏠</div>
     </div>
-    <iframe class="game-frame" id="gameFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe>
+    
+    <!-- Game Container -->
+    <div class="game-container">
+        <div class="game-header">
+            <div class="game-title" id="pageTitle">Nebula Hub Game</div>
+            <div class="controls">
+                <button class="control-btn" onclick="refreshGame()">Refresh</button>
+                <button class="control-btn" onclick="fullscreen()">Fullscreen</button>
+                <button class="control-btn" onclick="goBack()">Back</button>
+            </div>
+        </div>
+        <iframe class="game-frame" id="gameFrame" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe>
+    </div>
 
     <script>
+        // Get game from URL
         const urlParams = new URLSearchParams(window.location.search);
-        const gameUrl = urlParams.get('url') || urlParams.get('game');
+        const gameUrl = urlParams.get('url') || 'https://slope-game.online';
         const gameName = urlParams.get('name') || 'Game';
         
+        // Set page title
         document.getElementById('pageTitle').textContent = gameName + ' | Nebula Hub';
+        document.title = gameName + ' | Nebula Hub';
         
-        if (gameUrl) {
-            document.getElementById('gameFrame').src = gameUrl;
-            localStorage.setItem('lastGameUrl', gameUrl);
-        }
+        // Load game
+        document.getElementById('gameFrame').src = gameUrl;
+        localStorage.setItem('lastGameUrl', gameUrl);
+        localStorage.setItem('lastGameName', gameName);
         
-        function refreshFrame() {
+        // Functions
+        function refreshGame() {
             const frame = document.getElementById('gameFrame');
             frame.src = frame.src;
         }
         
         function fullscreen() {
-            const frame = document.getElementById('gameFrame');
-            if (frame.requestFullscreen) frame.requestFullscreen();
-            else if (frame.mozRequestFullScreen) frame.mozRequestFullScreen();
-            else if (frame.webkitRequestFullscreen) frame.webkitRequestFullscreen();
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.mozRequestFullScreen) {
+                    elem.mozRequestFullScreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
         }
         
         function goBack() {
-            window.history.back();
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = 'games.html';
+            }
         }
         
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+        
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') goBack();
-            if (e.key === 'F5') refreshFrame();
+            if (e.key === 'F5') refreshGame();
             if (e.key === 'F11') fullscreen();
+            if (e.key === 'Home') goHome();
+        });
+        
+        // Fullscreen change event
+        document.addEventListener('fullscreenchange', function() {
+            const sidebar = document.querySelector('.sidebar');
+            if (document.fullscreenElement) {
+                sidebar.style.opacity = '0';
+                sidebar.style.pointerEvents = 'none';
+            } else {
+                sidebar.style.opacity = '1';
+                sidebar.style.pointerEvents = 'auto';
+            }
         });
     </script>
 </body>
