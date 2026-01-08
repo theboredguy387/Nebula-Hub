@@ -5,51 +5,292 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apps | Nebula Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/storage/css/main.css" />
-    <link rel="stylesheet" href="/storage/css/apps.css" />
+    <style>
+        :root {
+            --nebula-primary: #1a0a2a;
+            --nebula-secondary: #0a0a1a;
+            --nebula-accent: #00a8ff;
+            --nebula-accent2: #9c88ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--nebula-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(26, 10, 42, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 168, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(156, 136, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 10, 42, 0.95);
+            border-right: 2px solid var(--nebula-accent);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 168, 255, 0.2);
+            border-left: 3px solid var(--nebula-accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        
+        .apps-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .apps-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .apps-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .apps-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        
+        /* Apps Grid */
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+        }
+        
+        .app-card {
+            background: rgba(26, 10, 42, 0.6);
+            border-radius: 20px;
+            padding: 30px 25px;
+            text-align: center;
+            border: 1px solid rgba(156, 136, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--nebula-accent);
+            box-shadow: 0 20px 40px rgba(0, 168, 255, 0.2);
+            background: rgba(26, 10, 42, 0.8);
+        }
+        
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .app-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+        
+        .app-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                padding: 10px;
+            }
+            .logo h1, .logo p, .nav-link span {
+                display: none;
+            }
+            .nav-link {
+                justify-content: center;
+                padding: 15px 10px;
+            }
+            .main-content {
+                margin-left: 70px;
+                padding: 20px;
+            }
+            .apps-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="nebula-bg"></div>
     
-    <header class="page-header">
-        <a href="/" class="back-btn">← Home</a>
-        <h1>Cosmic Apps</h1>
-    </header>
-
-    <main class="apps-container">
-        <div class="apps-grid">
-            <div class="app-card" onclick="loadApp('google')">
-                <div class="app-icon">G</div>
-                <h3>Google</h3>
-                <p>Search Engine</p>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>Nebula Hub</h1>
+            <p>Cosmic Apps</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="games.html" class="nav-link">
+                <span>🎮</span>
+                <span>Games</span>
+            </a>
+            <a href="proxy.html" class="nav-link">
+                <span>🌐</span>
+                <span>Proxy</span>
+            </a>
+            <a href="apps.html" class="nav-link active">
+                <span>📱</span>
+                <span>Apps</span>
+            </a>
+            <a href="about.html" class="nav-link">
+                <span>ℹ️</span>
+                <span>About</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="apps-container">
+            <div class="apps-header">
+                <h1>Cosmic Apps</h1>
+                <p>Access popular applications through our secure proxy</p>
             </div>
-            <div class="app-card" onclick="loadApp('youtube')">
-                <div class="app-icon">YT</div>
-                <h3>YouTube</h3>
-                <p>Video Platform</p>
-            </div>
-            <div class="app-card" onclick="loadApp('discord')">
-                <div class="app-icon">D</div>
-                <h3>Discord</h3>
-                <p>Chat App</p>
-            </div>
-            <div class="app-card" onclick="loadApp('spotify')">
-                <div class="app-icon">S</div>
-                <h3>Spotify</h3>
-                <p>Music Streaming</p>
-            </div>
-            <div class="app-card" onclick="loadApp('netflix')">
-                <div class="app-icon">N</div>
-                <h3>Netflix</h3>
-                <p>Streaming Service</p>
-            </div>
-            <div class="app-card" onclick="loadApp('tiktok')">
-                <div class="app-icon">TT</div>
-                <h3>TikTok</h3>
-                <p>Short Videos</p>
+            
+            <div class="apps-grid">
+                <div class="app-card" onclick="loadApp('google')">
+                    <div class="app-icon">G</div>
+                    <h3>Google</h3>
+                    <p>Search Engine</p>
+                </div>
+                <div class="app-card" onclick="loadApp('youtube')">
+                    <div class="app-icon">YT</div>
+                    <h3>YouTube</h3>
+                    <p>Video Platform</p>
+                </div>
+                <div class="app-card" onclick="loadApp('discord')">
+                    <div class="app-icon">D</div>
+                    <h3>Discord</h3>
+                    <p>Chat App</p>
+                </div>
+                <div class="app-card" onclick="loadApp('spotify')">
+                    <div class="app-icon">S</div>
+                    <h3>Spotify</h3>
+                    <p>Music Streaming</p>
+                </div>
+                <div class="app-card" onclick="loadApp('netflix')">
+                    <div class="app-icon">N</div>
+                    <h3>Netflix</h3>
+                    <p>Streaming Service</p>
+                </div>
+                <div class="app-card" onclick="loadApp('tiktok')">
+                    <div class="app-icon">TT</div>
+                    <h3>TikTok</h3>
+                    <p>Short Videos</p>
+                </div>
+                <div class="app-card" onclick="loadApp('twitter')">
+                    <div class="app-icon">T</div>
+                    <h3>Twitter</h3>
+                    <p>Social Media</p>
+                </div>
+                <div class="app-card" onclick="loadApp('instagram')">
+                    <div class="app-icon">IG</div>
+                    <h3>Instagram</h3>
+                    <p>Photo Sharing</p>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
 
     <script>
         function loadApp(app) {
@@ -59,12 +300,27 @@
                 'discord': 'https://discord.com',
                 'spotify': 'https://spotify.com',
                 'netflix': 'https://netflix.com',
-                'tiktok': 'https://tiktok.com'
+                'tiktok': 'https://tiktok.com',
+                'twitter': 'https://twitter.com',
+                'instagram': 'https://instagram.com'
             };
+            
             if (apps[app]) {
-                window.location.href = `/proxy.html?url=${encodeURIComponent(apps[app])}`;
+                const encodedUrl = btoa(apps[app]);
+                window.location.href = `iframe.html?url=${encodedUrl}&name=${app}`;
             }
         }
+        
+        // Set active nav
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
