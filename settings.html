@@ -5,70 +5,542 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings | Nebula Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/storage/css/main.css" />
+    <style>
+        :root {
+            --nebula-primary: #1a0a2a;
+            --nebula-secondary: #0a0a1a;
+            --nebula-accent: #00a8ff;
+            --nebula-accent2: #9c88ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--nebula-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(26, 10, 42, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 168, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(156, 136, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 10, 42, 0.95);
+            border-right: 2px solid var(--nebula-accent);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 168, 255, 0.2);
+            border-left: 3px solid var(--nebula-accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        
+        .settings-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .settings-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .settings-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .settings-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        
+        /* Setting Groups */
+        .setting-group {
+            background: rgba(26, 10, 42, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(156, 136, 255, 0.2);
+        }
+        
+        .setting-group h3 {
+            color: var(--nebula-accent);
+            margin-bottom: 25px;
+            font-size: 24px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(156, 136, 255, 0.2);
+        }
+        
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        
+        .setting-item label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        select, input[type="checkbox"] {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--nebula-accent);
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-primary);
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Buttons */
+        .settings-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .settings-btn {
+            padding: 15px 40px;
+            border-radius: 25px;
+            border: 2px solid var(--nebula-accent);
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .settings-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 168, 255, 0.3);
+        }
+        
+        .reset-btn {
+            background: transparent;
+            color: var(--nebula-accent);
+        }
+        
+        .reset-btn:hover {
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                padding: 10px;
+            }
+            .logo h1, .logo p, .nav-link span {
+                display: none;
+            }
+            .nav-link {
+                justify-content: center;
+                padding: 15px 10px;
+            }
+            .main-content {
+                margin-left: 70px;
+                padding: 20px;
+            }
+            .setting-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .settings-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="nebula-bg"></div>
     
-    <header class="page-header">
-        <a href="/" class="back-btn">← Home</a>
-        <h1>Settings</h1>
-    </header>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>Nebula Hub</h1>
+            <p>Settings</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="games.html" class="nav-link">
+                <span>🎮</span>
+                <span>Games</span>
+            </a>
+            <a href="proxy.html" class="nav-link">
+                <span>🌐</span>
+                <span>Proxy</span>
+            </a>
+            <a href="apps.html" class="nav-link">
+                <span>📱</span>
+                <span>Apps</span>
+            </a>
+            <a href="about.html" class="nav-link">
+                <span>ℹ️</span>
+                <span>About</span>
+            </a>
+            <a href="settings.html" class="nav-link active">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="settings-container">
+            <div class="settings-header">
+                <h1>Settings</h1>
+                <p>Customize your Nebula Hub experience</p>
+            </div>
+            
+            <!-- Appearance Settings -->
+            <div class="setting-group">
+                <h3>Appearance</h3>
+                
+                <div class="setting-item">
+                    <label for="themeSelect">Theme</label>
+                    <select id="themeSelect">
+                        <option value="dark">Dark Nebula</option>
+                        <option value="blue">Blue Nebula</option>
+                        <option value="purple">Purple Nebula</option>
+                        <option value="green">Green Nebula</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="bgAnimation">Background Animation</label>
+                    <input type="checkbox" id="bgAnimation" checked>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="sidebarSize">Sidebar Size</label>
+                    <select id="sidebarSize">
+                        <option value="large">Large</option>
+                        <option value="compact">Compact</option>
+                        <option value="hidden">Auto-hide</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Proxy Settings -->
+            <div class="setting-group">
+                <h3>Proxy Settings</h3>
+                
+                <div class="setting-item">
+                    <label for="defaultServer">Default Server</label>
+                    <select id="defaultServer">
+                        <option value="auto">Auto (Fastest)</option>
+                        <option value="us-east">US East</option>
+                        <option value="us-west">US West</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="enableCloak">Enable Cloaking</label>
+                    <input type="checkbox" id="enableCloak" checked>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="connectionType">Connection Type</label>
+                    <select id="connectionType">
+                        <option value="auto">Auto</option>
+                        <option value="websocket">WebSocket</option>
+                        <option value="fetch">Fetch API</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Game Settings -->
+            <div class="setting-group">
+                <h3>Game Settings</h3>
+                
+                <div class="setting-item">
+                    <label for="showMature">Show Mature Games</label>
+                    <input type="checkbox" id="showMature">
+                </div>
+                
+                <div class="setting-item">
+                    <label for="gameQuality">Default Game Quality</label>
+                    <select id="gameQuality">
+                        <option value="auto">Auto</option>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="gameSounds">Enable Game Sounds</label>
+                    <input type="checkbox" id="gameSounds" checked>
+                </div>
+            </div>
+            
+            <!-- Privacy Settings -->
+            <div class="setting-group">
+                <h3>Privacy & Data</h3>
+                
+                <div class="setting-item">
+                    <label for="saveHistory">Save Browsing History</label>
+                    <input type="checkbox" id="saveHistory" checked>
+                </div>
+                
+                <div class="setting-item">
+                    <label for="clearOnExit">Clear Data on Exit</label>
+                    <input type="checkbox" id="clearOnExit">
+                </div>
+                
+                <div class="setting-item">
+                    <label for="cookieSettings">Cookie Settings</label>
+                    <select id="cookieSettings">
+                        <option value="essential">Essential Only</option>
+                        <option value="functional">Functional</option>
+                        <option value="all">All Cookies</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="settings-buttons">
+                <button class="settings-btn" onclick="saveSettings()">Save Settings</button>
+                <button class="settings-btn reset-btn" onclick="resetSettings()">Reset to Default</button>
+                <button class="settings-btn" onclick="clearData()">Clear All Data</button>
+            </div>
+        </div>
+    </div>
 
-    <main class="settings-container">
-        <div class="setting-group">
-            <h3>Appearance</h3>
-            <div class="setting-item">
-                <label>Theme</label>
-                <select id="themeSelect">
-                    <option value="dark">Dark Nebula</option>
-                    <option value="blue">Blue Nebula</option>
-                    <option value="purple">Purple Nebula</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Background Animation</label>
-                <input type="checkbox" id="bgAnimation" checked>
-            </div>
-        </div>
+    <script>
+        // Load saved settings
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            
+            // Set active nav
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
         
-        <div class="setting-group">
-            <h3>Proxy Settings</h3>
-            <div class="setting-item">
-                <label>Default Server</label>
-                <select id="defaultServer">
-                    <option value="auto">Auto Select</option>
-                    <option value="us-east">US East</option>
-                    <option value="us-west">US West</option>
-                </select>
-            </div>
-            <div class="setting-item">
-                <label>Enable Cloaking</label>
-                <input type="checkbox" id="enableCloak" checked>
-            </div>
-        </div>
+        function loadSettings() {
+            // Theme
+            const savedTheme = localStorage.getItem('nebula_theme') || 'dark';
+            document.getElementById('themeSelect').value = savedTheme;
+            
+            // Background animation
+            const bgAnimation = localStorage.getItem('nebula_bg_animation');
+            document.getElementById('bgAnimation').checked = bgAnimation !== 'false';
+            
+            // Sidebar size
+            const sidebarSize = localStorage.getItem('nebula_sidebar_size') || 'large';
+            document.getElementById('sidebarSize').value = sidebarSize;
+            
+            // Default server
+            const defaultServer = localStorage.getItem('nebula_default_server') || 'auto';
+            document.getElementById('defaultServer').value = defaultServer;
+            
+            // Enable cloak
+            const enableCloak = localStorage.getItem('nebula_enable_cloak');
+            document.getElementById('enableCloak').checked = enableCloak !== 'false';
+            
+            // Connection type
+            const connectionType = localStorage.getItem('nebula_connection_type') || 'auto';
+            document.getElementById('connectionType').value = connectionType;
+            
+            // Show mature games
+            const showMature = localStorage.getItem('nebula_show_mature');
+            document.getElementById('showMature').checked = showMature === 'true';
+            
+            // Game quality
+            const gameQuality = localStorage.getItem('nebula_game_quality') || 'auto';
+            document.getElementById('gameQuality').value = gameQuality;
+            
+            // Game sounds
+            const gameSounds = localStorage.getItem('nebula_game_sounds');
+            document.getElementById('gameSounds').checked = gameSounds !== 'false';
+            
+            // Save history
+            const saveHistory = localStorage.getItem('nebula_save_history');
+            document.getElementById('saveHistory').checked = saveHistory !== 'false';
+            
+            // Clear on exit
+            const clearOnExit = localStorage.getItem('nebula_clear_on_exit');
+            document.getElementById('clearOnExit').checked = clearOnExit === 'true';
+            
+            // Cookie settings
+            const cookieSettings = localStorage.getItem('nebula_cookie_settings') || 'essential';
+            document.getElementById('cookieSettings').value = cookieSettings;
+        }
         
-        <div class="setting-group">
-            <h3>Game Settings</h3>
-            <div class="setting-item">
-                <label>Show Mature Games</label>
-                <input type="checkbox" id="showMature">
-            </div>
-            <div class="setting-item">
-                <label>Game Quality</label>
-                <select id="gameQuality">
-                    <option value="auto">Auto</option>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                </select>
-            </div>
-        </div>
+        function saveSettings() {
+            // Save all settings
+            const settings = {
+                theme: document.getElementById('themeSelect').value,
+                bgAnimation: document.getElementById('bgAnimation').checked,
+                sidebarSize: document.getElementById('sidebarSize').value,
+                defaultServer: document.getElementById('defaultServer').value,
+                enableCloak: document.getElementById('enableCloak').checked,
+                connectionType: document.getElementById('connectionType').value,
+                showMature: document.getElementById('showMature').checked,
+                gameQuality: document.getElementById('gameQuality').value,
+                gameSounds: document.getElementById('gameSounds').checked,
+                saveHistory: document.getElementById('saveHistory').checked,
+                clearOnExit: document.getElementById('clearOnExit').checked,
+                cookieSettings: document.getElementById('cookieSettings').value
+            };
+            
+            // Save to localStorage
+            Object.keys(settings).forEach(key => {
+                localStorage.setItem(`nebula_${key}`, settings[key]);
+            });
+            
+            // Apply theme
+            applyTheme(settings.theme);
+            
+            // Show success message
+            alert('Settings saved successfully!');
+        }
         
-        <button class="save-btn" onclick="saveSettings()">Save Settings</button>
-        <button class="reset-btn" onclick="resetSettings()">Reset to Default</button>
-    </main>
-
-    <script src="/storage/js/settings.js"></script>
+        function applyTheme(theme) {
+            const root = document.documentElement;
+            
+            switch(theme) {
+                case 'dark':
+                    root.style.setProperty('--nebula-primary', '#1a0a2a');
+                    root.style.setProperty('--nebula-secondary', '#0a0a1a');
+                    root.style.setProperty('--nebula-accent', '#00a8ff');
+                    root.style.setProperty('--nebula-accent2', '#9c88ff');
+                    break;
+                case 'blue':
+                    root.style.setProperty('--nebula-primary', '#0a1a2a');
+                    root.style.setProperty('--nebula-secondary', '#001a33');
+                    root.style.setProperty('--nebula-accent', '#00ccff');
+                    root.style.setProperty('--nebula-accent2', '#0099cc');
+                    break;
+                case 'purple':
+                    root.style.setProperty('--nebula-primary', '#2a0a2a');
+                    root.style.setProperty('--nebula-secondary', '#1a001a');
+                    root.style.setProperty('--nebula-accent', '#ff00ff');
+                    root.style.setProperty('--nebula-accent2', '#cc00cc');
+                    break;
+                case 'green':
+                    root.style.setProperty('--nebula-primary', '#0a2a1a');
+                    root.style.setProperty('--nebula-secondary', '#001a0a');
+                    root.style.setProperty('--nebula-accent', '#00ff88');
+                    root.style.setProperty('--nebula-accent2', '#00cc66');
+                    break;
+            }
+        }
+        
+        function resetSettings() {
+            if (confirm('Are you sure you want to reset all settings to defaults?')) {
+                localStorage.clear();
+                loadSettings();
+                alert('Settings reset to defaults!');
+            }
+        }
+        
+        function clearData() {
+            if (confirm('This will clear all your browsing history, saved games, and preferences. Continue?')) {
+                localStorage.clear();
+                sessionStorage.clear();
+                alert('All data cleared successfully!');
+                window.location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
