@@ -5,16 +5,226 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 | Nebula Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/storage/css/main.css" />
+    <style>
+        :root {
+            --nebula-primary: #1a0a2a;
+            --nebula-secondary: #0a0a1a;
+            --nebula-accent: #00a8ff;
+            --nebula-accent2: #9c88ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--nebula-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(26, 10, 42, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 168, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(156, 136, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        .error-container {
+            max-width: 600px;
+            padding: 40px;
+            background: rgba(26, 10, 42, 0.8);
+            border-radius: 30px;
+            border: 2px solid var(--nebula-accent);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .error-code {
+            font-size: 120px;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+        
+        .error-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+        
+        .error-message {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .back-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 168, 255, 0.3);
+        }
+        
+        .navigation-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-link {
+            padding: 12px 25px;
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid rgba(0, 168, 255, 0.3);
+            color: var(--nebula-accent);
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover {
+            background: rgba(0, 168, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 80px;
+            }
+            
+            .error-title {
+                font-size: 28px;
+            }
+            
+            .error-message {
+                font-size: 16px;
+            }
+            
+            .navigation-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="nebula-bg"></div>
     
     <div class="error-container">
-        <h1>404</h1>
-        <h2>Page Lost in Space</h2>
-        <p>The page you're looking for has drifted into the cosmic void.</p>
-        <a href="/" class="btn">Return to Home</a>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Lost in Space</h1>
+        <p class="error-message">
+            The page you're looking for has drifted into the cosmic void. 
+            It might have been moved, deleted, or never existed in this dimension.
+        </p>
+        
+        <a href="index.html" class="back-button">Return to Home</a>
+        
+        <div class="navigation-links">
+            <a href="games.html" class="nav-link">Games</a>
+            <a href="proxy.html" class="nav-link">Proxy</a>
+            <a href="apps.html" class="nav-link">Apps</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="settings.html" class="nav-link">Settings</a>
+        </div>
     </div>
+
+    <script>
+        // Add some nebula particles for effect
+        document.addEventListener('DOMContentLoaded', function() {
+            createNebulaParticles();
+        });
+        
+        function createNebulaParticles() {
+            const colors = ['#00a8ff', '#9c88ff', '#ff00ff', '#00ff88'];
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: fixed;
+                    width: ${Math.random() * 10 + 2}px;
+                    height: ${Math.random() * 10 + 2}px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    border-radius: 50%;
+                    opacity: ${Math.random() * 0.3 + 0.1};
+                    z-index: -1;
+                    pointer-events: none;
+                `;
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                document.body.appendChild(particle);
+                
+                // Animate
+                animateParticle(particle);
+            }
+        }
+        
+        function animateParticle(particle) {
+            let x = parseFloat(particle.style.left);
+            let y = parseFloat(particle.style.top);
+            let xSpeed = (Math.random() - 0.5) * 0.5;
+            let ySpeed = (Math.random() - 0.5) * 0.5;
+            
+            function move() {
+                x += xSpeed;
+                y += ySpeed;
+                
+                // Bounce off edges
+                if (x < 0 || x > 100) xSpeed *= -1;
+                if (y < 0 || y > 100) ySpeed *= -1;
+                
+                particle.style.left = x + 'vw';
+                particle.style.top = y + 'vh';
+                
+                requestAnimationFrame(move);
+            }
+            
+            move();
+        }
+    </script>
 </body>
 </html>
