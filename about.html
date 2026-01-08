@@ -5,37 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About | Nebula Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/storage/css/main.css" />
+    <style>
+        :root {
+            --nebula-primary: #1a0a2a;
+            --nebula-secondary: #0a0a1a;
+            --nebula-accent: #00a8ff;
+            --nebula-accent2: #9c88ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--nebula-secondary);
+            color: var(--text-primary);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .nebula-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(26, 10, 42, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 168, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(156, 136, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 10, 42, 0.95);
+            border-right: 2px solid var(--nebula-accent);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+        
+        .logo p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 168, 255, 0.2);
+            border-left: 3px solid var(--nebula-accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 40px;
+            min-height: 100vh;
+        }
+        
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, var(--nebula-accent), var(--nebula-accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-header p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+        
+        /* About Cards */
+        .about-card {
+            background: rgba(26, 10, 42, 0.6);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(156, 136, 255, 0.2);
+        }
+        
+        .about-card h2 {
+            color: var(--nebula-accent);
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .about-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        .about-card ul {
+            color: var(--text-secondary);
+            padding-left: 20px;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .about-card li {
+            margin-bottom: 10px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+                padding: 10px;
+            }
+            .logo h1, .logo p, .nav-link span {
+                display: none;
+            }
+            .nav-link {
+                justify-content: center;
+                padding: 15px 10px;
+            }
+            .main-content {
+                margin-left: 70px;
+                padding: 20px;
+            }
+            .about-card {
+                padding: 25px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="nebula-bg"></div>
     
-    <header class="page-header">
-        <a href="/" class="back-btn">← Home</a>
-        <h1>About Nebula Hub</h1>
-    </header>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>Nebula Hub</h1>
+            <p>About</p>
+        </div>
+        
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="games.html" class="nav-link">
+                <span>🎮</span>
+                <span>Games</span>
+            </a>
+            <a href="proxy.html" class="nav-link">
+                <span>🌐</span>
+                <span>Proxy</span>
+            </a>
+            <a href="apps.html" class="nav-link">
+                <span>📱</span>
+                <span>Apps</span>
+            </a>
+            <a href="about.html" class="nav-link active">
+                <span>ℹ️</span>
+                <span>About</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="about-container">
+            <div class="about-header">
+                <h1>About Nebula Hub</h1>
+                <p>Learn about our cosmic unblocking platform</p>
+            </div>
+            
+            <div class="about-card">
+                <h2>What is Nebula Hub?</h2>
+                <p>Nebula Hub is a cosmic-themed web platform that provides access to unblocked games, websites, and applications through secure proxy technology. Our mission is to offer a safe and accessible browsing experience for educational and entertainment purposes.</p>
+                <p>Built with modern web technologies, Nebula Hub combines a beautiful nebula-themed interface with powerful unblocking capabilities.</p>
+            </div>
+            
+            <div class="about-card">
+                <h2>Features</h2>
+                <ul>
+                    <li><strong>100+ Unblocked Games:</strong> Access popular games through secure proxy servers</li>
+                    <li><strong>Cosmic Proxy:</strong> Browse any website with enhanced privacy and security</li>
+                    <li><strong>Multiple Server Locations:</strong> Choose from servers around the world for optimal performance</li>
+                    <li><strong>No Installation Required:</strong> Works directly in your web browser</li>
+                    <li><strong>Mobile Friendly:</strong> Optimized for all devices and screen sizes</li>
+                    <li><strong>Secure Connection:</strong> Encrypted connections for safe browsing</li>
+                </ul>
+            </div>
+            
+            <div class="about-card">
+                <h2>Disclaimer</h2>
+                <p>Nebula Hub is intended for educational purposes and responsible use only. Users are responsible for complying with their local laws, school policies, and network regulations.</p>
+                <p>We do not condone or support the bypassing of security measures for malicious purposes. Use this service responsibly and at your own risk.</p>
+            </div>
+            
+            <div class="about-card">
+                <h2>Contact & Support</h2>
+                <p>For questions, feedback, or support, please visit our GitHub repository or contact us through appropriate channels.</p>
+                <p>Remember to use Nebula Hub responsibly and respect the policies of your network administrator.</p>
+            </div>
+        </div>
+    </div>
 
-    <main class="about-container">
-        <div class="about-card">
-            <h2>What is Nebula Hub?</h2>
-            <p>Nebula Hub is a cosmic-themed unblocking platform that provides access to games, websites, and applications through secure proxy servers.</p>
-        </div>
-        
-        <div class="about-card">
-            <h2>Features</h2>
-            <ul>
-                <li>100+ Unblocked Games</li>
-                <li>Secure Web Proxy</li>
-                <li>Multiple Server Locations</li>
-                <li>No Installation Required</li>
-                <li>Mobile Friendly</li>
-            </ul>
-        </div>
-        
-        <div class="about-card">
-            <h2>Disclaimer</h2>
-            <p>Nebula Hub is intended for educational purposes only. Use at your own risk and comply with your local laws and network policies.</p>
-        </div>
-    </main>
+    <script>
+        // Set active nav
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
