@@ -5,26 +5,190 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Games | Nebula Hub</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/storage/css/main.css" />
-    <link rel="stylesheet" href="/storage/css/games.css" />
+    <link rel="stylesheet" href="storage/css/main.css" />
+    <link rel="stylesheet" href="storage/css/games.css" />
+    <style>
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: rgba(26, 10, 42, 0.95);
+            border-right: 2px solid #00a8ff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.3);
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            background: linear-gradient(45deg, #00a8ff, #9c88ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 168, 255, 0.2);
+            border-left: 3px solid #00a8ff;
+        }
+        
+        .games-main {
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        .games-header {
+            margin-bottom: 30px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            max-width: 500px;
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: 2px solid #00a8ff;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            .logo h1, .nav-link span {
+                display: none;
+            }
+            .nav-link {
+                justify-content: center;
+                padding: 15px 10px;
+            }
+            .games-main {
+                margin-left: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="nebula-bg"></div>
     
-    <header class="page-header">
-        <a href="/" class="back-btn">← Home</a>
-        <h1>Cosmic Games</h1>
-        <div class="search-container">
-            <input type="text" id="gameSearch" placeholder="Search 100+ games..." class="search-bar">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h1>Nebula Hub</h1>
         </div>
-    </header>
-
-    <main class="games-container">
+        
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="games.html" class="nav-link active">
+                <span>🎮</span>
+                <span>Games</span>
+            </a>
+            <a href="proxy.html" class="nav-link">
+                <span>🌐</span>
+                <span>Proxy</span>
+            </a>
+            <a href="apps.html" class="nav-link">
+                <span>📱</span>
+                <span>Apps</span>
+            </a>
+            <a href="about.html" class="nav-link">
+                <span>ℹ️</span>
+                <span>About</span>
+            </a>
+            <a href="settings.html" class="nav-link">
+                <span>⚙️</span>
+                <span>Settings</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="games-main">
+        <div class="games-header">
+            <h1 style="font-size: 36px; margin-bottom: 10px;">Cosmic Games</h1>
+            <p style="color: #b0b0b0;">Browse and play 100+ unblocked games</p>
+            <input type="text" id="gameSearch" placeholder="Search games..." class="search-bar">
+        </div>
+        
         <div class="games-grid" id="gamesGrid">
-            <!-- Games loaded dynamically -->
+            <!-- Games loaded by JavaScript -->
         </div>
-    </main>
+    </div>
 
-    <script src="/storage/js/games.js"></script>
+    <script src="storage/js/games.js"></script>
+    <script>
+        // Search functionality
+        document.getElementById('gameSearch').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const games = document.querySelectorAll('.game-item');
+            
+            games.forEach(game => {
+                const name = game.querySelector('h3').textContent.toLowerCase();
+                const desc = game.querySelector('p').textContent.toLowerCase();
+                
+                if (name.includes(searchTerm) || desc.includes(searchTerm)) {
+                    game.style.display = 'block';
+                } else {
+                    game.style.display = 'none';
+                }
+            });
+        });
+        
+        // Load games
+        const games = [
+            { name: "Slope", desc: "3D Ball Game", url: "https://slope-game.online" },
+            { name: "Retro Bowl", desc: "Football Game", url: "https://retrobowl.me" },
+            { name: "Minecraft", desc: "Classic Edition", url: "https://classic.minecraft.net" },
+            { name: "Subway Surfers", desc: "Endless Runner", url: "https://subway-surfers.io" },
+            { name: "Geometry Dash", desc: "Rhythm Game", url: "https://geometrydash.io" },
+            { name: "Temple Run 2", desc: "Adventure Runner", url: "https://templerun2.io" },
+            { name: "Cookie Clicker", desc: "Clicker Game", url: "https://cookieclicker.io" },
+            { name: "2048", desc: "Puzzle Game", url: "https://play2048.co" },
+            { name: "Tetris", desc: "Classic Puzzle", url: "https://tetris.com/play-tetris" },
+            { name: "Snake", desc: "Classic Game", url: "https://snake.googlemaps.com" }
+        ];
+        
+        const grid = document.getElementById('gamesGrid');
+        games.forEach(game => {
+            const div = document.createElement('div');
+            div.className = 'game-item';
+            div.innerHTML = `
+                <h3>${game.name}</h3>
+                <p>${game.desc}</p>
+                <button onclick="window.location.href='iframe.html?url=${encodeURIComponent(game.url)}&name=${encodeURIComponent(game.name)}'">Play</button>
+            `;
+            grid.appendChild(div);
+        });
+    </script>
 </body>
 </html>
